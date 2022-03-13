@@ -268,6 +268,10 @@ namespace EditorTexto
                 case Keys.Control | Keys.W:
                     quebraDeLinhaToolStripMenuItem_Click(sender, e);
                     break;
+
+                case Keys.Control | Keys.D:
+                    horaDataToolStripMenuItem_Click(sender, e);
+                    break;
             }
         }
 

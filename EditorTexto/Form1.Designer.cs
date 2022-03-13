@@ -40,6 +40,7 @@ namespace EditorTexto
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.editarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.horaDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quebraDeLinhaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.coresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +52,10 @@ namespace EditorTexto
             this.darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.greenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ferramentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportarCriptografadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importarDescriptografandoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.criarChaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdAbrirArquivo = new System.Windows.Forms.OpenFileDialog();
@@ -58,11 +63,6 @@ namespace EditorTexto
             this.txtTela = new System.Windows.Forms.RichTextBox();
             this.fdFont = new System.Windows.Forms.FontDialog();
             this.cdColor = new System.Windows.Forms.ColorDialog();
-            this.quebraDeLinhaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ferramentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportarCriptografadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importarDescriptografandoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.criarChaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -151,8 +151,15 @@ namespace EditorTexto
             // 
             this.horaDataToolStripMenuItem.Name = "horaDataToolStripMenuItem";
             this.horaDataToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-            this.horaDataToolStripMenuItem.Text = "Hora/Data";
+            this.horaDataToolStripMenuItem.Text = "Hora/Data                     Ctrl+D";
             this.horaDataToolStripMenuItem.Click += new System.EventHandler(this.horaDataToolStripMenuItem_Click);
+            // 
+            // quebraDeLinhaToolStripMenuItem
+            // 
+            this.quebraDeLinhaToolStripMenuItem.Name = "quebraDeLinhaToolStripMenuItem";
+            this.quebraDeLinhaToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.quebraDeLinhaToolStripMenuItem.Text = "Quebra de linha            Ctrl+W";
+            this.quebraDeLinhaToolStripMenuItem.Click += new System.EventHandler(this.quebraDeLinhaToolStripMenuItem_Click);
             // 
             // editarToolStripMenuItem
             // 
@@ -242,45 +249,6 @@ namespace EditorTexto
             this.normalToolStripMenuItem.Text = "Padrão";
             this.normalToolStripMenuItem.Click += new System.EventHandler(this.normalToolStripMenuItem_Click);
             // 
-            // ajudaToolStripMenuItem
-            // 
-            this.ajudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sobreToolStripMenuItem});
-            this.ajudaToolStripMenuItem.Name = "ajudaToolStripMenuItem";
-            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(50, 19);
-            this.ajudaToolStripMenuItem.Text = "Ajuda";
-            // 
-            // sobreToolStripMenuItem
-            // 
-            this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sobreToolStripMenuItem.Text = "Sobre                   F1";
-            this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
-            // 
-            // ofdAbrirArquivo
-            // 
-            this.ofdAbrirArquivo.FileName = "arquivo.txt";
-            // 
-            // txtTela
-            // 
-            this.txtTela.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtTela.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTela.Location = new System.Drawing.Point(0, 25);
-            this.txtTela.Margin = new System.Windows.Forms.Padding(4);
-            this.txtTela.Name = "txtTela";
-            this.txtTela.Size = new System.Drawing.Size(612, 435);
-            this.txtTela.TabIndex = 2;
-            this.txtTela.Text = "";
-            this.txtTela.WordWrap = false;
-            this.txtTela.TextChanged += new System.EventHandler(this.txtTela_TextChanged);
-            // 
-            // quebraDeLinhaToolStripMenuItem
-            // 
-            this.quebraDeLinhaToolStripMenuItem.Name = "quebraDeLinhaToolStripMenuItem";
-            this.quebraDeLinhaToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-            this.quebraDeLinhaToolStripMenuItem.Text = "Quebra de linha            Ctrl+W";
-            this.quebraDeLinhaToolStripMenuItem.Click += new System.EventHandler(this.quebraDeLinhaToolStripMenuItem_Click);
-            // 
             // ferramentaToolStripMenuItem
             // 
             this.ferramentaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -308,6 +276,38 @@ namespace EditorTexto
             this.criarChaveToolStripMenuItem.Name = "criarChaveToolStripMenuItem";
             this.criarChaveToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.criarChaveToolStripMenuItem.Text = "Criar chave";
+            // 
+            // ajudaToolStripMenuItem
+            // 
+            this.ajudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sobreToolStripMenuItem});
+            this.ajudaToolStripMenuItem.Name = "ajudaToolStripMenuItem";
+            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(50, 19);
+            this.ajudaToolStripMenuItem.Text = "Ajuda";
+            // 
+            // sobreToolStripMenuItem
+            // 
+            this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
+            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.sobreToolStripMenuItem.Text = "Sobre                   F1";
+            this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
+            // 
+            // ofdAbrirArquivo
+            // 
+            this.ofdAbrirArquivo.FileName = "arquivo.txt";
+            // 
+            // txtTela
+            // 
+            this.txtTela.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtTela.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTela.Location = new System.Drawing.Point(0, 25);
+            this.txtTela.Margin = new System.Windows.Forms.Padding(4);
+            this.txtTela.Name = "txtTela";
+            this.txtTela.Size = new System.Drawing.Size(612, 435);
+            this.txtTela.TabIndex = 2;
+            this.txtTela.Text = "";
+            this.txtTela.WordWrap = false;
+            this.txtTela.TextChanged += new System.EventHandler(this.txtTela_TextChanged);
             // 
             // Form1
             // 
