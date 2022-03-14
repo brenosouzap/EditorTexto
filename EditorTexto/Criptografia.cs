@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using System.Security.Cryptography;
+using System.Security;
 
 
 namespace EditorTexto
@@ -20,7 +20,7 @@ namespace EditorTexto
 
         private void criarChave()
         {
-
+            
         }
 
         private void criptografia()

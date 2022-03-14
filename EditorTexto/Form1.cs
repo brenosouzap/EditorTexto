@@ -272,6 +272,27 @@ namespace EditorTexto
                 case Keys.Control | Keys.D:
                     horaDataToolStripMenuItem_Click(sender, e);
                     break;
+
+                case Keys.Control | Keys.Z:
+                    desfazerCtrlZToolStripMenuItem_Click(sender, e);
+                    break;
+
+                case Keys.Control | Keys.C:
+                    copiarCtrlCToolStripMenuItem_Click(sender, e);
+                    break;
+
+                case Keys.Control | Keys.Y:
+                    refazerCtrlUToolStripMenuItem_Click(sender, e);
+                    break;
+
+
+                case Keys.Control | Keys.V:
+                    colarToolStripMenuItem_Click(sender, e);
+                    break;
+
+                case Keys.Control | Keys.F:
+                    localizarCtrlFToolStripMenuItem_Click(sender, e);
+                    break;
             }
         }
 
@@ -323,6 +344,32 @@ namespace EditorTexto
                 this.Text = "*TEdit";
             else if (caminhoArquivo != null && txtTela.Text != string.Empty)
                 this.Text = "*TEdit - " + caminhoArquivo;
+        }
+
+        private void desfazerCtrlZToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            txtTela.Undo();
+        }
+
+        private void refazerCtrlUToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            txtTela.Redo();
+        }
+
+        private void copiarCtrlCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            txtTela.Copy();
+        }
+
+        private void colarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            txtTela.Paste();
+        }
+
+        private void localizarCtrlFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Arrumar esse Find para que o usuario digite o que pesquisar
+            txtTela.Find("SQL");
         }
 
         private void normalToolStripMenuItem_Click(object sender, EventArgs e)

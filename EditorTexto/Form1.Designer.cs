@@ -39,6 +39,10 @@ namespace EditorTexto
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.editarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.desfazerCtrlZToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refazerCtrlUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copiarCtrlCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.horaDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quebraDeLinhaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +67,7 @@ namespace EditorTexto
             this.txtTela = new System.Windows.Forms.RichTextBox();
             this.fdFont = new System.Windows.Forms.FontDialog();
             this.cdColor = new System.Windows.Forms.ColorDialog();
+            this.localizarCtrlFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -141,17 +146,50 @@ namespace EditorTexto
             // editarToolStripMenuItem1
             // 
             this.editarToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.desfazerCtrlZToolStripMenuItem,
+            this.refazerCtrlUToolStripMenuItem,
+            this.copiarCtrlCToolStripMenuItem,
+            this.colarToolStripMenuItem,
             this.horaDataToolStripMenuItem,
-            this.quebraDeLinhaToolStripMenuItem});
+            this.quebraDeLinhaToolStripMenuItem,
+            this.localizarCtrlFToolStripMenuItem});
             this.editarToolStripMenuItem1.Name = "editarToolStripMenuItem1";
             this.editarToolStripMenuItem1.Size = new System.Drawing.Size(49, 19);
             this.editarToolStripMenuItem1.Text = "Editar";
+            // 
+            // desfazerCtrlZToolStripMenuItem
+            // 
+            this.desfazerCtrlZToolStripMenuItem.Name = "desfazerCtrlZToolStripMenuItem";
+            this.desfazerCtrlZToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.desfazerCtrlZToolStripMenuItem.Text = "Desfazer                         Ctrl+Z";
+            this.desfazerCtrlZToolStripMenuItem.Click += new System.EventHandler(this.desfazerCtrlZToolStripMenuItem_Click);
+            // 
+            // refazerCtrlUToolStripMenuItem
+            // 
+            this.refazerCtrlUToolStripMenuItem.Name = "refazerCtrlUToolStripMenuItem";
+            this.refazerCtrlUToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.refazerCtrlUToolStripMenuItem.Text = "Refazer                           Ctrl+Y";
+            this.refazerCtrlUToolStripMenuItem.Click += new System.EventHandler(this.refazerCtrlUToolStripMenuItem_Click);
+            // 
+            // copiarCtrlCToolStripMenuItem
+            // 
+            this.copiarCtrlCToolStripMenuItem.Name = "copiarCtrlCToolStripMenuItem";
+            this.copiarCtrlCToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.copiarCtrlCToolStripMenuItem.Text = "Copiar                            Ctrl+C";
+            this.copiarCtrlCToolStripMenuItem.Click += new System.EventHandler(this.copiarCtrlCToolStripMenuItem_Click);
+            // 
+            // colarToolStripMenuItem
+            // 
+            this.colarToolStripMenuItem.Name = "colarToolStripMenuItem";
+            this.colarToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.colarToolStripMenuItem.Text = "Colar                               Ctrl+V";
+            this.colarToolStripMenuItem.Click += new System.EventHandler(this.colarToolStripMenuItem_Click);
             // 
             // horaDataToolStripMenuItem
             // 
             this.horaDataToolStripMenuItem.Name = "horaDataToolStripMenuItem";
             this.horaDataToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-            this.horaDataToolStripMenuItem.Text = "Hora/Data                     Ctrl+D";
+            this.horaDataToolStripMenuItem.Text = "Hora/Data                      Ctrl+D";
             this.horaDataToolStripMenuItem.Click += new System.EventHandler(this.horaDataToolStripMenuItem_Click);
             // 
             // quebraDeLinhaToolStripMenuItem
@@ -309,6 +347,13 @@ namespace EditorTexto
             this.txtTela.WordWrap = false;
             this.txtTela.TextChanged += new System.EventHandler(this.txtTela_TextChanged);
             // 
+            // localizarCtrlFToolStripMenuItem
+            // 
+            this.localizarCtrlFToolStripMenuItem.Name = "localizarCtrlFToolStripMenuItem";
+            this.localizarCtrlFToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.localizarCtrlFToolStripMenuItem.Text = "Localizar                         Ctrl+F";
+            this.localizarCtrlFToolStripMenuItem.Click += new System.EventHandler(this.localizarCtrlFToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -366,6 +411,11 @@ namespace EditorTexto
         private System.Windows.Forms.ToolStripMenuItem exportarCriptografadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importarDescriptografandoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem criarChaveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem desfazerCtrlZToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refazerCtrlUToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copiarCtrlCToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem localizarCtrlFToolStripMenuItem;
     }
 }
 
