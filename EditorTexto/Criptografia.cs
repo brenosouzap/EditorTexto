@@ -4,57 +4,69 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using System.Security;
+using System.Security.Cryptography;
+using System.Windows.Forms;
 
 
 namespace EditorTexto
 {
-    class Criptografia
+    class Criptografia : HashAlgorithm
     {
-        string nomeArquivo { get; set; }
+        HashAlgorithm algoritmo { get; set; }
 
-        public Criptografia(string nomeArquivo)
+        public Criptografia(HashAlgorithm algoritmo)
         {
-            this.nomeArquivo = nomeArquivo;
+            this.algoritmo = algoritmo;
         }
 
-        private void criarChave()
+        public string criptografa(string textoTela)
+        {
+            var valorCodificado = Encoding.UTF8.GetBytes(textoTela);
+            var senhaCifrada = algoritmo.ComputeHash(valorCodificado);
+            var sb = new StringBuilder();
+
+            foreach (var caractere in senhaCifrada)
+            {
+                sb.Append(caractere.ToString("X2"));
+            }
+
+            return sb.ToString();
+        }
+
+        private void descriptografa(string senhaDigitada, string senhaCadastrada)
         {
             
         }
 
-        private void criptografia()
+        //private bool verificaHash(string senhaDigitada, string senhaCadastrada)
+        //{
+        //    var senhaCifrada = algoritmo.ComputeHash(Encoding.UTF8.GetBytes(senhaDigitada));
+
+        //    if (string.IsNullOrEmpty(senhaCadastrada))
+        //        throw new NullReferenceException("Cadastre uma senha.");
+
+        //    var sb = new StringBuilder();
+
+        //    foreach (var caractere in senhaCifrada)
+        //    {
+        //        sb.Append(caractere.ToString("X2"));
+        //    }
+        //    return sb.ToString() == senhaCadastrada;
+        //}
+
+        public override void Initialize()
         {
-            //return textoCrip;
+            throw new NotImplementedException();
         }
 
-        private void descriptografia()
+        protected override void HashCore(byte[] array, int ibStart, int cbSize)
         {
-            //return textoDescrip;
+            throw new NotImplementedException();
         }
 
-        private void exportar(string nomeArquivo)
+        protected override byte[] HashFinal()
         {
-            string textoCrip;
-
-            using (var escreverDados = new StreamWriter(nomeArquivo, false))
-            {
-                escreverDados.WriteLine(nomeArquivo);
-            }
-
-            //return textoCrip;
-        }
-
-        private void importar(string nomeArquivo)
-        {
-            string textoDescrip;
-
-            using (var escreverDados = new StreamReader(nomeArquivo, false))
-            {
-                
-            }
-
-            //return textoDescrip;
+            throw new NotImplementedException();
         }
     }
 }

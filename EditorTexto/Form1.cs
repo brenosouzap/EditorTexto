@@ -9,41 +9,28 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Printing;
+using System.Security.Cryptography;
 
 namespace EditorTexto
 {
     public partial class Form1 : Form
     {
-        string caminhoArquivo, retorno = "Cancel";
+        public string caminhoArquivo, retorno = "Cancel";
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void corTema (Color background, Color foreground)
-        {
-            if (background == DefaultBackColor && foreground == DefaultForeColor)
-            {
-                txtTela.BackColor = Color.White;
-                txtTela.ForeColor = DefaultForeColor;
-                menuStrip1.BackColor = DefaultBackColor;
-                menuStrip1.ForeColor = DefaultForeColor;
-            } else
-            {
-                txtTela.BackColor = background;
-                txtTela.ForeColor = foreground;
-                menuStrip1.BackColor = background;
-                menuStrip1.ForeColor = foreground;
-            }
-        }
-
+        #region FormSobre
         private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Sobre s1 = new Sobre();
             s1.Show();
         }
+        #endregion FormSobre
 
+        #region MenuArquivo
         private void salvarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var slr1 = new Salvar();
@@ -108,7 +95,7 @@ namespace EditorTexto
 
         private void defineCaracteristicasPadrao_ButtonNovo()
         {
-            // Voltando aos padrões normais dos componentes abaixo
+            // Voltando as caracteristicas normais dos componentes abaixo
             this.Text = "TEdit - Sem Titulo";
             caminhoArquivo = null;
             txtTela.Text = string.Empty;
@@ -147,17 +134,6 @@ namespace EditorTexto
             }
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs evento)
-        {
-            sairToolStripMenuItem_Click(sender, evento);
-
-            // Habilita o cancelar ao clicar no botao X da janela e clicar em CANCELAR do MessageBox
-            if (evento.Cancel != true)
-            {
-                evento.Cancel = true;
-            }
-        }
-
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Esse metodo não está sendo EXECUTADO IMEDIATAMENTE - CORRIGIR
@@ -185,14 +161,7 @@ namespace EditorTexto
             }
         }
 
-        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (fdFont.ShowDialog() == DialogResult.OK)
-            {
-                txtTela.Font = fdFont.Font;
-            }
-        }
-
+        #region Imprimir
         private void imprimirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PrintDocument imprimirDados = new PrintDocument();
@@ -218,13 +187,11 @@ namespace EditorTexto
                 imprimirDados.Print();
             }
         }
+        #endregion Imprimir
 
-        private void coresToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (cdColor.ShowDialog() == DialogResult.OK)
-                txtTela.ForeColor = cdColor.Color;
-        }
+        #endregion MenuArquivo
 
+        #region TeclasAtalhos
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyData)
@@ -295,7 +262,9 @@ namespace EditorTexto
                     break;
             }
         }
+        #endregion TeclasAtalhos
 
+        #region MenuFormatar
         private void direitaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             txtTela.SelectionAlignment = HorizontalAlignment.Right;
@@ -311,6 +280,40 @@ namespace EditorTexto
             txtTela.SelectionAlignment = HorizontalAlignment.Center;
         }
 
+        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (fdFont.ShowDialog() == DialogResult.OK)
+            {
+                txtTela.Font = fdFont.Font;
+            }
+        }
+        #endregion MenuFormatar
+
+        #region Temas
+        private void corTema(Color backcolor, Color forecolor)
+        {
+            if (backcolor == DefaultBackColor && forecolor == DefaultForeColor)
+            {
+                txtTela.BackColor = Color.White;
+                txtTela.ForeColor = DefaultForeColor;
+                menuStrip1.BackColor = DefaultBackColor;
+                menuStrip1.ForeColor = DefaultForeColor;
+            }
+            else
+            {
+                txtTela.BackColor = backcolor;
+                txtTela.ForeColor = forecolor;
+                menuStrip1.BackColor = backcolor;
+                menuStrip1.ForeColor = forecolor;
+            }
+        }
+
+        private void coresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (cdColor.ShowDialog() == DialogResult.OK)
+                txtTela.ForeColor = cdColor.Color;
+        }
+
         private void darkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             corTema(Color.Black, Color.DarkGray);
@@ -321,18 +324,25 @@ namespace EditorTexto
             corTema(Color.DarkGreen, Color.Black);
         }
 
-        private void horaDataToolStripMenuItem_Click(object sender, EventArgs e)
+        private void normalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DateTime dateTime = DateTime.Now;
-            
-            // Arrumar esse codigo para escrever a data no local do cursor do teclado
-            // E nao no final da tela
-            txtTela.Text += dateTime.ToString();
+            corTema(DefaultBackColor, DefaultForeColor);
         }
 
-        private void quebraDeLinhaToolStripMenuItem_Click(object sender, EventArgs e)
+        #endregion Temas
+
+        #region Eventos
+        private void Form1_Load(object sender, EventArgs e)
         {
-            _ = (txtTela.WordWrap == true) ? txtTela.WordWrap = false : txtTela.WordWrap = true;
+            txtProcurar.Enabled = false;
+        }
+
+        private void txtProcurar_Leave(object sender, EventArgs e)
+        {
+            string teste = txtProcurar.Text;
+            txtProcurar.Text = "Digite sua pesquisa";
+            txtProcurar.Visible = false;
+            localizarTexto(txtTela.BackColor, teste);
         }
 
         private void txtTela_TextChanged(object sender, EventArgs e)
@@ -344,6 +354,34 @@ namespace EditorTexto
                 this.Text = "*TEdit";
             else if (caminhoArquivo != null && txtTela.Text != string.Empty)
                 this.Text = "*TEdit - " + caminhoArquivo;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs evento)
+        {
+            sairToolStripMenuItem_Click(sender, evento);
+
+            // Habilita o cancelar ao clicar no botao X da janela e clicar em CANCELAR do MessageBox
+            if (evento.Cancel != true)
+            {
+                evento.Cancel = true;
+            }
+        }
+
+        #endregion Eventos
+
+        #region MenuEditar
+        private void horaDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DateTime dateTime = DateTime.Now;
+
+            // Arrumar esse codigo para escrever a data no local do cursor do teclado
+            // E nao no final da tela
+            txtTela.Text += dateTime.ToString();
+        }
+
+        private void quebraDeLinhaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = (txtTela.WordWrap == true) ? txtTela.WordWrap = false : txtTela.WordWrap = true;
         }
 
         private void desfazerCtrlZToolStripMenuItem_Click(object sender, EventArgs e)
@@ -366,15 +404,69 @@ namespace EditorTexto
             txtTela.Paste();
         }
 
-        private void localizarCtrlFToolStripMenuItem_Click(object sender, EventArgs e)
+        private void localizarTexto(Color corMarcacaoTexto, string texto)
         {
-            //Arrumar esse Find para que o usuario digite o que pesquisar
-            txtTela.Find("SQL");
+            string textoProcurado = texto;
+
+            if (!string.IsNullOrWhiteSpace(textoProcurado))
+            {
+                int i = 0;
+                while (i < txtTela.Text.LastIndexOf(textoProcurado))
+                {
+                    txtTela.Find(textoProcurado, i, txtTela.TextLength, RichTextBoxFinds.None);
+                    txtTela.SelectionBackColor = corMarcacaoTexto;
+                    i = txtTela.Text.IndexOf(textoProcurado, i) + 1;
+                }
+            }
         }
 
-        private void normalToolStripMenuItem_Click(object sender, EventArgs e)
+        private void txtProcurar_KeyDown(object sender, KeyEventArgs e)
         {
-            corTema(DefaultBackColor, DefaultForeColor);
+            if (e.KeyCode == Keys.Enter)
+            {
+                localizarTexto(Color.Red, txtProcurar.Text);
+            }
         }
+
+        private void localizarCtrlFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!txtTela.Text.Equals(""))
+            {
+                txtProcurar.Enabled = true;
+                txtProcurar.Visible = true;
+                txtProcurar.Focus();
+            }
+        }
+
+        #endregion MenuEditar
+
+        #region MenuFerramentas
+        private void exportarCriptografadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var cripto = new Criptografia(SHA512.Create());
+
+            string texto = cripto.criptografa(txtTela.Text);
+
+            sfdSalvarComo.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+
+            var opcao = sfdSalvarComo.ShowDialog();
+
+            if (opcao == DialogResult.OK)
+            {
+                caminhoArquivo = sfdSalvarComo.FileName;
+
+                using (var arquivo = new StreamWriter(caminhoArquivo, false))
+                {
+                    arquivo.WriteLine(texto);
+                }
+
+                if (File.Exists(caminhoArquivo))
+                    MessageBox.Show("Arquivo criptografado gerado com sucesso.", "Criptografia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("Erro ao gerar arquivo.", "Criptografia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion MenuFerramentas
     }
 }

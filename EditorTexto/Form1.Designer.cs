@@ -45,6 +45,7 @@ namespace EditorTexto
             this.colarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.horaDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quebraDeLinhaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.localizarCtrlFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.coresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +68,7 @@ namespace EditorTexto
             this.txtTela = new System.Windows.Forms.RichTextBox();
             this.fdFont = new System.Windows.Forms.FontDialog();
             this.cdColor = new System.Windows.Forms.ColorDialog();
-            this.localizarCtrlFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtProcurar = new System.Windows.Forms.TextBox();
             arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -199,6 +200,13 @@ namespace EditorTexto
             this.quebraDeLinhaToolStripMenuItem.Text = "Quebra de linha            Ctrl+W";
             this.quebraDeLinhaToolStripMenuItem.Click += new System.EventHandler(this.quebraDeLinhaToolStripMenuItem_Click);
             // 
+            // localizarCtrlFToolStripMenuItem
+            // 
+            this.localizarCtrlFToolStripMenuItem.Name = "localizarCtrlFToolStripMenuItem";
+            this.localizarCtrlFToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.localizarCtrlFToolStripMenuItem.Text = "Localizar                         Ctrl+F";
+            this.localizarCtrlFToolStripMenuItem.Click += new System.EventHandler(this.localizarCtrlFToolStripMenuItem_Click);
+            // 
             // editarToolStripMenuItem
             // 
             this.editarToolStripMenuItem.BackColor = System.Drawing.SystemColors.Menu;
@@ -302,6 +310,7 @@ namespace EditorTexto
             this.exportarCriptografadoToolStripMenuItem.Name = "exportarCriptografadoToolStripMenuItem";
             this.exportarCriptografadoToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.exportarCriptografadoToolStripMenuItem.Text = "Exportar Criptografado";
+            this.exportarCriptografadoToolStripMenuItem.Click += new System.EventHandler(this.exportarCriptografadoToolStripMenuItem_Click);
             // 
             // importarDescriptografandoToolStripMenuItem
             // 
@@ -347,18 +356,30 @@ namespace EditorTexto
             this.txtTela.WordWrap = false;
             this.txtTela.TextChanged += new System.EventHandler(this.txtTela_TextChanged);
             // 
-            // localizarCtrlFToolStripMenuItem
+            // txtProcurar
             // 
-            this.localizarCtrlFToolStripMenuItem.Name = "localizarCtrlFToolStripMenuItem";
-            this.localizarCtrlFToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-            this.localizarCtrlFToolStripMenuItem.Text = "Localizar                         Ctrl+F";
-            this.localizarCtrlFToolStripMenuItem.Click += new System.EventHandler(this.localizarCtrlFToolStripMenuItem_Click);
+            this.txtProcurar.BackColor = System.Drawing.SystemColors.Window;
+            this.txtProcurar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtProcurar.Enabled = false;
+            this.txtProcurar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProcurar.ForeColor = System.Drawing.Color.Silver;
+            this.txtProcurar.Location = new System.Drawing.Point(327, 25);
+            this.txtProcurar.Name = "txtProcurar";
+            this.txtProcurar.Size = new System.Drawing.Size(285, 24);
+            this.txtProcurar.TabIndex = 3;
+            this.txtProcurar.Text = "Digite sua pesquisa";
+            this.txtProcurar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtProcurar.Visible = false;
+            this.txtProcurar.WordWrap = false;
+            this.txtProcurar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProcurar_KeyDown);
+            this.txtProcurar.Leave += new System.EventHandler(this.txtProcurar_Leave);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(612, 460);
+            this.Controls.Add(this.txtProcurar);
             this.Controls.Add(this.txtTela);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -370,6 +391,7 @@ namespace EditorTexto
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TEdit";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -416,6 +438,7 @@ namespace EditorTexto
         private System.Windows.Forms.ToolStripMenuItem copiarCtrlCToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem colarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem localizarCtrlFToolStripMenuItem;
+        private System.Windows.Forms.TextBox txtProcurar;
     }
 }
 
