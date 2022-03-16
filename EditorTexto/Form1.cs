@@ -137,7 +137,7 @@ namespace EditorTexto
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Esse metodo não está sendo EXECUTADO IMEDIATAMENTE - CORRIGIR
-            if (caminhoArquivo == null & txtTela.Text == string.Empty)
+            if (caminhoArquivo == null && txtTela.Text == string.Empty)
             {
                 Application.ExitThread();
             }
@@ -251,10 +251,9 @@ namespace EditorTexto
                 case Keys.Control | Keys.Y:
                     refazerCtrlUToolStripMenuItem_Click(sender, e);
                     break;
-
-
+                  
                 case Keys.Control | Keys.V:
-                    colarToolStripMenuItem_Click(sender, e);
+                    Clipboard.GetText();
                     break;
 
                 case Keys.Control | Keys.F:
@@ -339,10 +338,10 @@ namespace EditorTexto
 
         private void txtProcurar_Leave(object sender, EventArgs e)
         {
-            string teste = txtProcurar.Text;
+            string textoPesquisado = txtProcurar.Text;
             txtProcurar.Text = "Digite sua pesquisa";
             txtProcurar.Visible = false;
-            localizarTexto(txtTela.BackColor, teste);
+            localizarTexto(txtTela.BackColor, textoPesquisado);
         }
 
         private void txtTela_TextChanged(object sender, EventArgs e)
@@ -408,12 +407,13 @@ namespace EditorTexto
         {
             string textoProcurado = texto;
 
-            if (!string.IsNullOrWhiteSpace(textoProcurado))
+            if (!string.IsNullOrWhiteSpace(listaPesquisa[0]))
             {
                 int i = 0;
+
                 while (i < txtTela.Text.LastIndexOf(textoProcurado))
                 {
-                    txtTela.Find(textoProcurado, i, txtTela.TextLength, RichTextBoxFinds.None);
+                    txtTela.Find(textoProcurado, i, txtTela.Text.Length, RichTextBoxFinds.None);
                     txtTela.SelectionBackColor = corMarcacaoTexto;
                     i = txtTela.Text.IndexOf(textoProcurado, i) + 1;
                 }
