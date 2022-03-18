@@ -6,4 +6,12 @@
 
 **:floppy_disk: [Baixar Binario (.exe) Atualizado](./EditorTexto.exe?raw=true "Download")**
 
-## 🚀 Development
+## :rocket: Development
+- Language: **[C#](https://github.com/dotnet/csharplang) 5.0**
+- Framework:
+  - **[.NET](https://github.com/dotnet) Framework 5.0**
+  - **[WinForms](https://www.devexpress.com/products/net/controls/winforms/layout/)**
+- IDE: **[Visual Studio](https://github.com/microsoft) 2019**
+
+## :page_facing_up: License
+Licensed under [MIT License](./LICENSE).
