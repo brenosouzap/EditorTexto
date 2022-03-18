@@ -36,6 +36,7 @@ namespace EditorTexto
             this.salvarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salvarComoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imprimirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.habilitarSalvamentoAutomaticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.editarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,8 +45,8 @@ namespace EditorTexto
             this.copiarCtrlCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.horaDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quebraDeLinhaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.localizarCtrlFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quebraDeLinhaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.coresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,6 +70,7 @@ namespace EditorTexto
             this.fdFont = new System.Windows.Forms.FontDialog();
             this.cdColor = new System.Windows.Forms.ColorDialog();
             this.txtProcurar = new System.Windows.Forms.TextBox();
+            this.lbAutoSave = new System.Windows.Forms.Label();
             arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -81,6 +83,7 @@ namespace EditorTexto
             this.salvarToolStripMenuItem,
             this.salvarComoToolStripMenuItem,
             this.imprimirToolStripMenuItem,
+            this.habilitarSalvamentoAutomaticoToolStripMenuItem,
             this.sairToolStripMenuItem});
             arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
             arquivoToolStripMenuItem.Size = new System.Drawing.Size(61, 19);
@@ -121,6 +124,13 @@ namespace EditorTexto
             this.imprimirToolStripMenuItem.Text = "Imprimir                        Ctrl+P";
             this.imprimirToolStripMenuItem.Click += new System.EventHandler(this.imprimirToolStripMenuItem_Click);
             // 
+            // habilitarSalvamentoAutomaticoToolStripMenuItem
+            // 
+            this.habilitarSalvamentoAutomaticoToolStripMenuItem.Name = "habilitarSalvamentoAutomaticoToolStripMenuItem";
+            this.habilitarSalvamentoAutomaticoToolStripMenuItem.Size = new System.Drawing.Size(257, 22);
+            this.habilitarSalvamentoAutomaticoToolStripMenuItem.Text = "AutoSalvamento";
+            this.habilitarSalvamentoAutomaticoToolStripMenuItem.Click += new System.EventHandler(this.habilitarSalvamentoAutomaticoToolStripMenuItem_Click);
+            // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
@@ -152,8 +162,8 @@ namespace EditorTexto
             this.copiarCtrlCToolStripMenuItem,
             this.colarToolStripMenuItem,
             this.horaDataToolStripMenuItem,
-            this.quebraDeLinhaToolStripMenuItem,
-            this.localizarCtrlFToolStripMenuItem});
+            this.localizarCtrlFToolStripMenuItem,
+            this.quebraDeLinhaToolStripMenuItem});
             this.editarToolStripMenuItem1.Name = "editarToolStripMenuItem1";
             this.editarToolStripMenuItem1.Size = new System.Drawing.Size(49, 19);
             this.editarToolStripMenuItem1.Text = "Editar";
@@ -193,19 +203,19 @@ namespace EditorTexto
             this.horaDataToolStripMenuItem.Text = "Hora/Data                      Ctrl+D";
             this.horaDataToolStripMenuItem.Click += new System.EventHandler(this.horaDataToolStripMenuItem_Click);
             // 
-            // quebraDeLinhaToolStripMenuItem
-            // 
-            this.quebraDeLinhaToolStripMenuItem.Name = "quebraDeLinhaToolStripMenuItem";
-            this.quebraDeLinhaToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-            this.quebraDeLinhaToolStripMenuItem.Text = "Quebra de linha            Ctrl+W";
-            this.quebraDeLinhaToolStripMenuItem.Click += new System.EventHandler(this.quebraDeLinhaToolStripMenuItem_Click);
-            // 
             // localizarCtrlFToolStripMenuItem
             // 
             this.localizarCtrlFToolStripMenuItem.Name = "localizarCtrlFToolStripMenuItem";
             this.localizarCtrlFToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.localizarCtrlFToolStripMenuItem.Text = "Localizar                         Ctrl+F";
             this.localizarCtrlFToolStripMenuItem.Click += new System.EventHandler(this.localizarCtrlFToolStripMenuItem_Click);
+            // 
+            // quebraDeLinhaToolStripMenuItem
+            // 
+            this.quebraDeLinhaToolStripMenuItem.Name = "quebraDeLinhaToolStripMenuItem";
+            this.quebraDeLinhaToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.quebraDeLinhaToolStripMenuItem.Text = "Quebra de linha            Ctrl+W";
+            this.quebraDeLinhaToolStripMenuItem.Click += new System.EventHandler(this.quebraDeLinhaToolStripMenuItem_Click);
             // 
             // editarToolStripMenuItem
             // 
@@ -335,7 +345,7 @@ namespace EditorTexto
             // sobreToolStripMenuItem
             // 
             this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sobreToolStripMenuItem.Text = "Sobre                   F1";
             this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
             // 
@@ -374,11 +384,23 @@ namespace EditorTexto
             this.txtProcurar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProcurar_KeyDown);
             this.txtProcurar.Leave += new System.EventHandler(this.txtProcurar_Leave);
             // 
+            // lbAutoSave
+            // 
+            this.lbAutoSave.AutoSize = true;
+            this.lbAutoSave.Enabled = false;
+            this.lbAutoSave.Location = new System.Drawing.Point(5, 30);
+            this.lbAutoSave.Name = "lbAutoSave";
+            this.lbAutoSave.Size = new System.Drawing.Size(128, 18);
+            this.lbAutoSave.TabIndex = 4;
+            this.lbAutoSave.Text = "AutoSalvamento...";
+            this.lbAutoSave.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(612, 460);
+            this.Controls.Add(this.lbAutoSave);
             this.Controls.Add(this.txtProcurar);
             this.Controls.Add(this.txtTela);
             this.Controls.Add(this.menuStrip1);
@@ -439,6 +461,8 @@ namespace EditorTexto
         private System.Windows.Forms.ToolStripMenuItem colarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem localizarCtrlFToolStripMenuItem;
         private System.Windows.Forms.TextBox txtProcurar;
+        private System.Windows.Forms.ToolStripMenuItem habilitarSalvamentoAutomaticoToolStripMenuItem;
+        private System.Windows.Forms.Label lbAutoSave;
     }
 }
 

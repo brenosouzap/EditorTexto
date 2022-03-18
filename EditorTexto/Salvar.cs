@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace EditorTexto
 {
-    class Salvar : Form1
+    class Salvar
     {
-        public void salvar(string caminho, string texto, bool leituraArquivo)
+        public void Salvamento(string caminho, string texto, bool leituraArquivo)
         {
             try
             {
@@ -32,5 +32,25 @@ namespace EditorTexto
                 MessageBox.Show("Message: " + ex.Message);
             }
         }
+
+        async Task TempoAutoSalvamentoArquivo(bool flag)
+        {
+            if (flag == false) return;
+
+            await Task.Delay(10);
+        }
+
+        public async void AutoSalvamentoArquivo(bool habilitaDesabilita)
+        {
+            if (habilitaDesabilita)
+            {
+                //while (habilitaDesabilita)
+                //{
+                await TempoAutoSalvamentoArquivo(habilitaDesabilita);
+                MessageBox.Show("Passou um minuto.");
+                //}
+            }
+        }
     }
 }
+
