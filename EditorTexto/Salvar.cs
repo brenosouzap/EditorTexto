@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.IO;
 using System.Windows.Forms;
 
 namespace EditorTexto
 {
-    class Salvar
+    class Salvar : Form1
     {
         public void Salvamento(string caminho, string texto, bool leituraArquivo)
         {
@@ -33,23 +34,40 @@ namespace EditorTexto
             }
         }
 
-        async Task TempoAutoSalvamentoArquivo(bool flag)
+        public Task AutoSalvamentoArquivoAsync(bool flag, CancellationToken cancellationToken = default)
         {
-            if (flag == false) return;
+            Task task = null;
 
-            await Task.Delay(10);
-        }
-
-        public async void AutoSalvamentoArquivo(bool habilitaDesabilita)
-        {
-            if (habilitaDesabilita)
+            if (flag == true)
             {
-                //while (habilitaDesabilita)
-                //{
-                await TempoAutoSalvamentoArquivo(habilitaDesabilita);
-                MessageBox.Show("Passou um minuto.");
-                //}
+                task = Task.Run(async () =>
+                {
+                    while (flag == true)
+                    {
+                        MessageBox.Show("Rodando...");
+                        await Task.Delay(6000);
+                    }
+                });
             }
+
+            if (flag == false)
+            {
+              
+                // Arrumar o cancelamento da tarefa, porque esta fechando o editor
+                if (cancellationToken.IsCancellationRequested == false)
+                    try
+                    {
+                        throw new TaskCanceledException(task);
+                    }
+                    catch (TaskCanceledException)
+                    {
+                        MessageBox.Show("Tarefa cancelada.");
+                    }
+
+                return task;
+            }
+
+            return task;
         }
     }
 }

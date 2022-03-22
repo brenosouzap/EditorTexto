@@ -164,7 +164,20 @@ namespace EditorTexto
         private void habilitarSalvamentoAutomaticoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Salvar salvar = new Salvar();
-            salvar.AutoSalvamentoArquivo(autoSalvamento);
+            lbAutoSave.Visible = true;
+
+            if (habilitarSalvamentoAutomaticoToolStripMenuItem.Text == "On|AutoSalvamento")
+            {
+                autoSalvamento = true;
+                habilitarSalvamentoAutomaticoToolStripMenuItem.Text = "off|AutoSalvamento";
+                salvar.AutoSalvamentoArquivoAsync(autoSalvamento);
+            }
+            else
+            {
+                autoSalvamento = false;
+                habilitarSalvamentoAutomaticoToolStripMenuItem.Text = "On|AutoSalvamento";
+                salvar.AutoSalvamentoArquivoAsync(autoSalvamento);
+            }
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
@@ -194,6 +207,8 @@ namespace EditorTexto
             }
         }
 
+        #endregion MenuArquivo
+        
         #region Imprimir
         private void imprimirToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -221,8 +236,6 @@ namespace EditorTexto
             }
         }
         #endregion Imprimir
-
-        #endregion MenuArquivo
 
         #region TeclasAtalhos
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -379,6 +392,8 @@ namespace EditorTexto
 
         private void txtTela_TextChanged(object sender, EventArgs e)
         {
+            label2.Text = "Clns: " + txtTela.Text.Insert(txtTela.SelectionStart, "1");
+
             // Como seria fazer essas combinacoes usando ENUM com [Flags]
             if (caminhoArquivo == null && txtTela.Text.Equals(string.Empty))
                 this.Text = "TEdit";
@@ -480,10 +495,6 @@ namespace EditorTexto
             cripto.salvarArquivoCripto(textoCripto);
         }
 
-
-
         #endregion MenuFerramentas
-
     }
 }
-

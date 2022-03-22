@@ -65,7 +65,7 @@ namespace EditorTexto
             // label3
             // 
             this.label3.BackColor = System.Drawing.SystemColors.Menu;
-            this.label3.Font = new System.Drawing.Font("Microsoft Uighur", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Modern No. 20", 57.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(-4, 2);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(229, 197);
