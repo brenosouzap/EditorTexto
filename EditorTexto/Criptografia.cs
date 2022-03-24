@@ -29,7 +29,7 @@ namespace EditorTexto
             }
 
             Rfc2898DeriveBytes chave = new Rfc2898DeriveBytes(senha, sal);
-            
+
             var algoritmo = new RijndaelManaged();
 
             algoritmo.Key = chave.GetBytes(16);

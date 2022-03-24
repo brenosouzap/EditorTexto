@@ -64,6 +64,7 @@ namespace EditorTexto
             this.criarChaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checarAtualizaçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdAbrirArquivo = new System.Windows.Forms.OpenFileDialog();
             this.sfdSalvarComo = new System.Windows.Forms.SaveFileDialog();
             this.txtTela = new System.Windows.Forms.RichTextBox();
@@ -74,7 +75,6 @@ namespace EditorTexto
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.checarAtualizaçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -332,6 +332,7 @@ namespace EditorTexto
             this.importarDescriptografandoToolStripMenuItem.Name = "importarDescriptografandoToolStripMenuItem";
             this.importarDescriptografandoToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.importarDescriptografandoToolStripMenuItem.Text = "Importar Descriptografando";
+            this.importarDescriptografandoToolStripMenuItem.Click += new System.EventHandler(this.importarDescriptografandoToolStripMenuItem_Click);
             // 
             // criarChaveToolStripMenuItem
             // 
@@ -351,9 +352,15 @@ namespace EditorTexto
             // sobreToolStripMenuItem
             // 
             this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.sobreToolStripMenuItem.Text = "Sobre                   F1";
             this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
+            // 
+            // checarAtualizaçãoToolStripMenuItem
+            // 
+            this.checarAtualizaçãoToolStripMenuItem.Name = "checarAtualizaçãoToolStripMenuItem";
+            this.checarAtualizaçãoToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.checarAtualizaçãoToolStripMenuItem.Text = "Checar Atualização";
             // 
             // ofdAbrirArquivo
             // 
@@ -427,12 +434,6 @@ namespace EditorTexto
             this.label1.Size = new System.Drawing.Size(40, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Lns: ";
-            // 
-            // checarAtualizaçãoToolStripMenuItem
-            // 
-            this.checarAtualizaçãoToolStripMenuItem.Name = "checarAtualizaçãoToolStripMenuItem";
-            this.checarAtualizaçãoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.checarAtualizaçãoToolStripMenuItem.Text = "Checar Atualização";
             // 
             // Form1
             // 

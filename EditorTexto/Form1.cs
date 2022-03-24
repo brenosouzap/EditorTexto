@@ -43,6 +43,7 @@ namespace EditorTexto
     {
         public string caminhoArquivo, retorno = "Cancel";
         bool autoSalvamento { get; set; } = false;
+        List<string> palavrasPesquisadas = new List<string>();
 
         public Form1()
         {
@@ -387,7 +388,24 @@ namespace EditorTexto
             string textoPesquisado = txtProcurar.Text;
             txtProcurar.Text = "Digite sua pesquisa";
             txtProcurar.Visible = false;
-            localizarTexto(txtTela.BackColor, textoPesquisado);
+
+            int i = 0;
+
+            // Limpa os textos pesquisados da tela
+            for (int j = palavrasPesquisadas.Count - 1; j >= 0; j--)
+            {
+                var totalPalavrasNaTela = txtTela.Text.LastIndexOf(palavrasPesquisadas[j]);
+                
+                while (i < totalPalavrasNaTela)
+                {
+                    txtTela.Find(palavrasPesquisadas[palavrasPesquisadas.Count - 1], i, txtTela.Text.Length, RichTextBoxFinds.None);
+                    txtTela.SelectionBackColor = txtTela.BackColor;
+                    i = txtTela.Text.IndexOf(palavrasPesquisadas[palavrasPesquisadas.Count - 1], i) + 1;
+                }
+                
+                i = 0; //reinicia contador
+                palavrasPesquisadas.Remove(palavrasPesquisadas[j]);
+            }
         }
 
         private void txtTela_TextChanged(object sender, EventArgs e)
@@ -452,17 +470,19 @@ namespace EditorTexto
 
         private void localizarTexto(Color corMarcacaoTexto, string texto)
         {
-            string textoProcurado = texto;
-
-            if (!string.IsNullOrWhiteSpace(textoProcurado))
+            if (!string.IsNullOrWhiteSpace(texto))
             {
-                int i = 0;
+                // Inclui a palavra pesquisada na lista - List<string>
+                palavrasPesquisadas.Add(texto);
 
-                while (i < txtTela.Text.LastIndexOf(textoProcurado))
+                for (int j = 0, i = 0; j <= palavrasPesquisadas.Count; ++j)
                 {
-                    txtTela.Find(textoProcurado, i, txtTela.Text.Length, RichTextBoxFinds.None);
-                    txtTela.SelectionBackColor = corMarcacaoTexto;
-                    i = txtTela.Text.IndexOf(textoProcurado, i) + 1;
+                    while (i < txtTela.Text.LastIndexOf(palavrasPesquisadas[palavrasPesquisadas.Count - 1]))
+                    {
+                        txtTela.Find(palavrasPesquisadas[palavrasPesquisadas.Count - 1], i, txtTela.Text.Length, RichTextBoxFinds.None);
+                        txtTela.SelectionBackColor = corMarcacaoTexto;
+                        i = txtTela.Text.IndexOf(palavrasPesquisadas[palavrasPesquisadas.Count - 1], i) + 1;
+                    }
                 }
             }
         }
@@ -493,6 +513,13 @@ namespace EditorTexto
             var cripto = new Criptografia();
             string textoCripto = cripto.criptografar(txtTela.Text);
             cripto.salvarArquivoCripto(textoCripto);
+        }
+
+        private void importarDescriptografandoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //var descripto = new Criptografia();
+
+            //descripto.descriptografar(txtTela.Text);
         }
 
         #endregion MenuFerramentas
