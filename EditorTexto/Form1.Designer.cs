@@ -352,15 +352,16 @@ namespace EditorTexto
             // sobreToolStripMenuItem
             // 
             this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sobreToolStripMenuItem.Text = "Sobre                   F1";
             this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
             // 
             // checarAtualizaçãoToolStripMenuItem
             // 
             this.checarAtualizaçãoToolStripMenuItem.Name = "checarAtualizaçãoToolStripMenuItem";
-            this.checarAtualizaçãoToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.checarAtualizaçãoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.checarAtualizaçãoToolStripMenuItem.Text = "Checar Atualização";
+            this.checarAtualizaçãoToolStripMenuItem.Click += new System.EventHandler(this.checarAtualizaçãoToolStripMenuItem_Click);
             // 
             // ofdAbrirArquivo
             // 

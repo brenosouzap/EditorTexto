@@ -36,6 +36,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Printing;
 using System.Security.Cryptography;
+using System.Net;
+
 
 namespace EditorTexto
 {
@@ -44,6 +46,7 @@ namespace EditorTexto
         public string caminhoArquivo, retorno = "Cancel";
         bool autoSalvamento { get; set; } = false;
         List<string> palavrasPesquisadas = new List<string>();
+        const double versaoEditor = 1.0;
 
         public Form1()
         {
@@ -74,9 +77,6 @@ namespace EditorTexto
                     caminhoArquivo = sfdSalvarComo.FileName;
 
                     slr1.Salvamento(caminhoArquivo, txtTela.Text, false);
-
-                    // Define OK para ser usado no botao SAIR e em seguida Cancelar
-                    retorno = "Ok";
                 }
             }
             else
@@ -183,10 +183,9 @@ namespace EditorTexto
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Esse metodo não está sendo EXECUTADO IMEDIATAMENTE - CORRIGIR
             if (caminhoArquivo == null && txtTela.Text == string.Empty)
             {
-                Application.ExitThread();
+                Environment.Exit(0);
             }
 
             DialogResult opcao = MessageBox.Show("Você deseja gravar o arquivo antes de sair?",
@@ -196,20 +195,17 @@ namespace EditorTexto
             {
                 case DialogResult.Yes:
                     salvarToolStripMenuItem_Click(sender, e);
-
-                    if (retorno == "Ok")
-                        Application.ExitThread();
-
+                    Environment.Exit(0);
                     break;
 
                 case DialogResult.No:
-                    Application.ExitThread();
+                    Environment.Exit(0);
                     break;
             }
         }
 
         #endregion MenuArquivo
-        
+
         #region Imprimir
         private void imprimirToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -389,21 +385,20 @@ namespace EditorTexto
             txtProcurar.Text = "Digite sua pesquisa";
             txtProcurar.Visible = false;
 
-            int i = 0;
-
             // Limpa os textos pesquisados da tela
             for (int j = palavrasPesquisadas.Count - 1; j >= 0; j--)
             {
-                var totalPalavrasNaTela = txtTela.Text.LastIndexOf(palavrasPesquisadas[j]);
-                
-                while (i < totalPalavrasNaTela)
+                int i = 0; // contador com a posição do elemento pesquisado na tela
+
+                var posicaoPalavraNaTela = txtTela.Text.LastIndexOf(palavrasPesquisadas[j]);
+
+                while (i < posicaoPalavraNaTela)
                 {
                     txtTela.Find(palavrasPesquisadas[palavrasPesquisadas.Count - 1], i, txtTela.Text.Length, RichTextBoxFinds.None);
                     txtTela.SelectionBackColor = txtTela.BackColor;
                     i = txtTela.Text.IndexOf(palavrasPesquisadas[palavrasPesquisadas.Count - 1], i) + 1;
                 }
-                
-                i = 0; //reinicia contador
+
                 palavrasPesquisadas.Remove(palavrasPesquisadas[j]);
             }
         }
@@ -523,5 +518,91 @@ namespace EditorTexto
         }
 
         #endregion MenuFerramentas
+
+        #region Ajuda
+
+        public bool verificarVersaoParaAtualizacao(string enderecoURL)
+        {
+            var cliente = new WebClient();
+
+            try
+            {
+                using (Stream conexaoURL = cliente.OpenRead(enderecoURL))
+                {
+                    using (StreamReader leituraVersao = new StreamReader(conexaoURL))
+                    {
+                        double versaoRepositorio = double.Parse(leituraVersao.ReadLine());
+
+                        if (versaoRepositorio > versaoEditor)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (WebException)
+            {
+                MessageBox.Show("Não foi possivel acessar a URL ou sua internet está inoperante.", "Verificando versao", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+            return false;
+        }
+
+        public void progressBar()
+        {
+            ProgressBar progressbar1;
+        }
+
+        private void checarAtualizaçãoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string urlArquivo = "https://github.com/brenosouzap/EditorTexto/blob/master/EditorTexto.exe?raw=true";
+            string urlVersao = "https://github.com/brenosouzap/EditorTexto/blob/master/versao.txt?raw=true";
+
+            if (verificarVersaoParaAtualizacao(urlVersao))
+            {
+                var atualizacao = MessageBox.Show("Deseja baixar a nova atualização do arquivo?", "Atualização", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                if (atualizacao == DialogResult.No) return;
+            } 
+            else
+            {
+                MessageBox.Show("Está é a versão mais atual.", "Atualização", MessageBoxButtons.OK);
+                return;
+            }
+
+            WebClient cliente = new WebClient();
+            
+            cliente.Headers.Add("Content-Type", "application/octet-stream");
+            cliente.Encoding = Encoding.UTF8;
+            //cliente.Headers.Add("Content-Length", );
+            cliente.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+
+            sfdSalvarComo.Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*";
+
+            var opcao = sfdSalvarComo.ShowDialog();
+
+            if (opcao == DialogResult.OK)
+            {
+                string localArquivo = sfdSalvarComo.FileName;
+               
+                try
+                {
+                    // Faz o download do arquivo na URL especificada
+                    cliente.DownloadFile(urlArquivo, localArquivo);
+
+                    MessageBox.Show("Nova versão do editor baixada com sucesso.");
+                }
+                catch (ArgumentNullException)
+                {
+                    MessageBox.Show("URL está nula.");
+                }
+                catch (NotSupportedException)
+                {
+                    MessageBox.Show("Endereço URL inválida ou vazia, ou download não foi completado.");
+                }
+            }
+        }
+
+        #endregion Ajuda
     }
 }
